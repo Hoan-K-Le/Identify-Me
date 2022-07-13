@@ -28,6 +28,7 @@
 
 - Tensorflow
 - Javascript/or Python
+- React
 - HTML
 - CSS
 - Tailwind
