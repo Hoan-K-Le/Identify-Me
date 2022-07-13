@@ -22,12 +22,12 @@
 ## Stretch
 
 - Able to upload video's and it can identify what the video is(example: if its a person in the video or an animal,etc)
-- Develop a Ai on the site that can pop up randomly to answer the question
+- Develop a Ai on the site that can pop up randomly to answer the question or descript the images for you
 
 ## Techonology Used
 
 - Tensorflow
-- Javascript
+- Javascript/or Python
 - HTML
 - CSS
 - Tailwind
