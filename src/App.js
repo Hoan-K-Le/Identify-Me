@@ -7,6 +7,8 @@ function App() {
   // use the useState as a way to save the mobilenet model in the model state
   const [model,setModel] = useState(null)
   const [imgUrl, setImgUrl] = useState(null)
+  // grabbing the data to display the predictions from the model
+  const [data, setData] = useState([])
   const imgRef = useRef()
 
 
@@ -29,14 +31,14 @@ function App() {
     }
   }
 
-  const handleIdentify = async (e) => {
+  const handleIdentify = async () => {
     // console.log('making sure the button works')
     //  grabbed the models data by classifying the img reference that we have passed on in the imgurl
-    const response = await model.classify(imgRef.current)
-    console.log(response)
+    const data = await model.classify(imgRef.current)
+    console.log(data)
+    setData(data)
   }
   
-
   const load_model = async () => {
     try {
       // set the mobilenet tensorflow model inside the state model
@@ -47,6 +49,7 @@ function App() {
     }
   }
   
+
 
   // making sure it runs one time only 
   useEffect(() => {
