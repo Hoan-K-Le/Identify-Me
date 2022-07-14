@@ -1,6 +1,7 @@
 import {useState, useEffect, useRef} from 'react'
 import * as mobilenet from '@tensorflow-models/mobilenet'
-import axios from 'axios'
+// import * as tf from '@tensorflow/tfjs-core';
+import '@tensorflow/tfjs-backend-cpu';
 
 function App() {
   // use the useState as a way to save the mobilenet model in the model state
@@ -9,7 +10,12 @@ function App() {
   const imgRef = useRef()
 
 
-  const imageUpload = (e) => {
+  // there is a delay on the page whenever the user is loading in
+  // maybe find a way to let the user know that they are in the process of loading in
+
+
+// event Handlers
+  const handleUpload = (e) => {
     // destructoring the files 
     const {files} = e.target
     // what if there is no files? how to check if there is a file
@@ -23,6 +29,13 @@ function App() {
     }
   }
 
+  const handleIdentify = async (e) => {
+    // console.log('making sure the button works')
+    const response = await model.classify(imgRef.current)
+    console.log(response)
+  }
+  
+
   const load_model = async () => {
     try {
       // set the mobilenet tensorflow model inside the state model
@@ -32,10 +45,12 @@ function App() {
       console.warn('ERRORRRR', err)
     }
   }
+  
 
   // making sure it runs one time only 
   useEffect(() => {
     load_model()
+
   }, []) // have an empty array for dependencies
 
 
@@ -44,7 +59,7 @@ function App() {
       <h1>IDENTIFY ME!</h1>
       {/* able to upload files locally*/}
       <input
-      onChange={imageUpload}
+      onChange={handleUpload}
        type='file' 
       //  accept all image files
       accept='image/*' 
@@ -57,7 +72,7 @@ function App() {
            ref={imgRef} /> : null}
       </div>
       {/* if the image exist, show the button, otherwise hide it */}
-      {imgUrl ? <button type='button'>What Am I </button> : null}
+      {imgUrl ? <button onClick={handleIdentify} type='button'>What Am I </button> : null}
     </div>
   );
 }
