@@ -1,6 +1,6 @@
 import {useState, useEffect, useRef} from 'react'
 import * as mobilenet from '@tensorflow-models/mobilenet'
-// import axios from 'axios'
+import axios from 'axios'
 
 function App() {
   // use the useState as a way to save the mobilenet model in the model state
@@ -23,6 +23,21 @@ function App() {
     }
   }
 
+  const load_model = async () => {
+    try {
+      // set the mobilenet tensorflow model inside the state model
+      const model = await mobilenet.load()
+      setModel(model)
+    } catch(err) {
+      console.warn('ERRORRRR', err)
+    }
+  }
+
+  // making sure it runs one time only 
+  useEffect(() => {
+    load_model()
+  }, []) // have an empty array for dependencies
+
 
   return (
     <div className="App">
@@ -41,7 +56,8 @@ function App() {
           crossOrigin='anonymous'
            ref={imgRef} /> : null}
       </div>
-      {imgUrl ? <button type='button'>What Am I</button> : null}
+      {/* if the image exist, show the button, otherwise hide it */}
+      {imgUrl ? <button type='button'>What Am I </button> : null}
     </div>
   );
 }
