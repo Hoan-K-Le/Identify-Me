@@ -31,6 +31,7 @@ function App() {
 
   const handleIdentify = async (e) => {
     // console.log('making sure the button works')
+    //  grabbed the models data by classifying the img reference that we have passed on in the imgurl
     const response = await model.classify(imgRef.current)
     console.log(response)
   }
