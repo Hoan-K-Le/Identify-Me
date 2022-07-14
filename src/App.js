@@ -2,21 +2,41 @@ import {useState, useEffect, useRef} from 'react'
 import * as mobilenet from '@tensorflow-models/mobilenet'
 // import * as tf from '@tensorflow/tfjs-core';
 import '@tensorflow/tfjs-backend-cpu';
+import { ModelLoggingVerbosity } from '@tensorflow/tfjs-layers/dist/base_callbacks';
+
 
 function App() {
   // use the useState as a way to save the mobilenet model in the model state
   const [model,setModel] = useState(null)
   const [imgUrl, setImgUrl] = useState(null)
+  const [loading, setLoading] = useState(false)
   // grabbing the data to display the predictions from the model
   const [data, setData] = useState([])
   const imgRef = useRef()
+  
+  
+  
+  
+
 
 
   // there is a delay on the page whenever the user is loading in
   // maybe find a way to let the user know that they are in the process of loading in
-
-
-// event Handlers
+  const load_model = async () => {
+    setLoading(true)
+    try {
+      // set the mobilenet tensorflow model inside the state model
+      const model = await mobilenet.load()
+      setModel(model)
+      // set the loading to false if the model is loading
+      setLoading(false)
+    } catch(err) {
+      console.warn('ERRORRRR', err)
+      setLoading(false)
+    }
+  }
+  
+  // event Handlers
   const handleUpload = (e) => {
     // destructoring the files 
     const {files} = e.target
@@ -30,7 +50,7 @@ function App() {
       setImgUrl(null)
     }
   }
-
+  
   const handleIdentify = async () => {
     // console.log('making sure the button works')
     //  grabbed the models data by classifying the img reference that we have passed on in the imgurl
@@ -39,25 +59,26 @@ function App() {
     setData(data)
   }
   
-  const load_model = async () => {
-    try {
-      // set the mobilenet tensorflow model inside the state model
-      const model = await mobilenet.load()
-      setModel(model)
-    } catch(err) {
-      console.warn('ERRORRRR', err)
-    }
-  }
-  
-
-
   // making sure it runs one time only 
   useEffect(() => {
     load_model()
-
+    
   }, []) // have an empty array for dependencies
-
-
+  
+  
+  
+  if(loading) {
+    // if the user is still loading in to site,
+    return (
+      <>
+      <img src='https://earthsky.org/upl/2019/06/b19e465cc4d37398ab2b72e9ba239e1a.jpg' 
+      alt='loadingscreen'
+       width='300'
+        height='300'/>
+      <h1>Pwease be patient, woof</h1></>
+      )
+  }
+  
   return (
     <div className="App">
       <h1>IDENTIFY ME!</h1>
