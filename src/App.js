@@ -102,7 +102,7 @@ function App() {
         {data.map((data, idx) => {
           return (
             <div key={`dataKey${idx}`}>
-              <h3>Best Guess: {(data.probability * 100).toFixed(2)}%</h3>
+              <h3>Best Guess: {data.className}{(data.probability * 100).toFixed(2)}%</h3>
               
             </div>
           
