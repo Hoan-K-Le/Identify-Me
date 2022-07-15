@@ -75,7 +75,7 @@ function App() {
       alt='loadingscreen'
        width='300'
         height='300'/>
-      <h1>Pwease be patient, woof</h1></>
+      <h1>Loading in..., woof</h1></>
       )
   }
   
@@ -98,6 +98,19 @@ function App() {
       </div>
       {/* if the image exist, show the button, otherwise hide it */}
       {imgUrl ? <button onClick={handleIdentify} type='button'>What Am I </button> : null}
+      {data.length > 0 ? <div>
+        {data.map((data, idx) => {
+          return (
+            <div key={`dataKey${idx}`}>
+              <h3>Best Guess: {(data.probability * 100).toFixed(2)}%</h3>
+              
+            </div>
+          
+          )
+        })}
+        
+        
+      </div> : null}
     </div>
   );
 }
