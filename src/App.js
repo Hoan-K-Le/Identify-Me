@@ -58,6 +58,8 @@ function App() {
   }
   
   const handleIdentify = async () => {
+    // to get rid of the text url after identifying the image
+    imageUrl.current.value = ''
     // console.log('making sure the button works')
     //  grabbed the models data by classifying the img reference that we have passed on in the imgurl
     const data = await model.classify(imgRef.current)
@@ -97,7 +99,12 @@ function App() {
       // if you're on your phone, it'll trigger the camera
       capture='camera' />
       {/* image url from website  */}
-      <input type='text' ref={imageUrl} onChange={handleChange}/>
+      <input type='text'
+      placeholder='Image address here'
+       ref={imageUrl} 
+       onChange={handleChange}
+       />
+
       <div>
         {imgUrl ? <img src={imgUrl}
          alt='picture'
