@@ -13,6 +13,7 @@ function App() {
   // grabbing the data to display the predictions from the model
   const [data, setData] = useState([])
   const imgRef = useRef()
+  const imageUrl = useRef()
   
   
   
@@ -37,6 +38,11 @@ function App() {
   }
   
   // event Handlers
+  const handleChange = (e) => {
+    setImgUrl(e.target.value)
+    setData([])
+  }
+
   const handleUpload = (e) => {
     // destructoring the files 
     const {files} = e.target
@@ -90,6 +96,8 @@ function App() {
       accept='image/*' 
       // if you're on your phone, it'll trigger the camera
       capture='camera' />
+      {/* image url from website  */}
+      <input type='text' ref={imageUrl} onChange={handleChange}/>
       <div>
         {imgUrl ? <img src={imgUrl}
          alt='picture'
@@ -102,7 +110,7 @@ function App() {
         {data.map((data, idx) => {
           return (
             <div key={`dataKey${idx}`}>
-              <h3>Best Guess: {data.className}{(data.probability * 100).toFixed(2)}%</h3>
+              <h3>Ai Guess: {data.className} {(data.probability * 100).toFixed(2)}%</h3>
               
             </div>
           
