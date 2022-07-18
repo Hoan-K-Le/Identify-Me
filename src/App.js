@@ -14,7 +14,8 @@ function App() {
   const [data, setData] = useState([])
   const imgRef = useRef()
   const imageUrl = useRef()
-  
+  const picRef = useRef()
+
   
   
   
@@ -38,6 +39,11 @@ function App() {
   }
   
   // event Handlers
+  const handleSubmit = () => {
+    picRef.current.click()
+  }
+
+
   const handleChange = (e) => {
     setImgUrl(e.target.value)
     setData([])
@@ -83,33 +89,53 @@ function App() {
       alt='loadingscreen'
        width='300'
         height='300'/>
-      <h1>Loading in..., woof</h1></>
+      <h1>Loading in... woof</h1></>
       )
   }
   
   return (
-    <div className="App">
-      <h1>IDENTIFY ME!</h1>
-      {/* able to upload files locally*/}
-      <input
-      onChange={handleUpload}
-       type='file' 
-      //  accept all image files
-      accept='image/*' 
-      // if you're on your phone, it'll trigger the camera
-      capture='camera' />
+    
+    <div>
+      <div className='flex justify-center items-center'>
+
+      <h1 className=''>IDENTIFY ME!</h1>
+      </div>
+     
+
+    <div className="justify-between grids-cols-3 flex items-center p-10">
+     
+      
+      <button className='border bg-gray-300 btn-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center 'type='submit' onClick={handleSubmit}>
+       <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
+       <span>Upload</span>
+      </button>
+      <span>Or</span>
       {/* image url from website  */}
-      <input type='text'
-      placeholder='Image address here'
+      <input
+      className='border border-xl bg-gray-200 text-center'
+       type='text'
+       placeholder='Image address here'
        ref={imageUrl} 
        onChange={handleChange}
        />
+      </div>
+{/* able to upload files locally*/}
+      <input className='invisible'
+      onChange={handleUpload}
+      type='file' 
+      //  accept all image files
+      accept='image/*' 
+      // if you're on your phone, it'll trigger the camera
+      capture='camera' 
+      ref={picRef}
+      />
+
 
       <div>
         {imgUrl ? <img src={imgUrl}
          alt='picture'
-          crossOrigin='anonymous'
-           ref={imgRef} /> : null}
+         crossOrigin='anonymous'
+         ref={imgRef} /> : null}
       </div>
       {/* if the image exist, show the button, otherwise hide it */}
       {imgUrl ? <button onClick={handleIdentify} type='button'>What Am I </button> : null}
@@ -117,7 +143,7 @@ function App() {
         {data.map((data, idx) => {
           return (
             <div key={`dataKey${idx}`}>
-              <h3>Ai Guess: {data.className} {(data.probability * 100).toFixed(2)}%</h3>
+              <h3 className=''>Ai Guess: {data.className} {(data.probability * 100).toFixed(2)}%</h3>
               
             </div>
           
@@ -126,7 +152,9 @@ function App() {
         
         
       </div> : null}
-    </div>
+    
+        </div>
+       
   );
 }
 
