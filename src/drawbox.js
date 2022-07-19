@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function DrawBox(detections, ctx) {
-  return detections.forEach(predict => {
+export const DrawBox = (detections, ctx) => {
+  return detections.forEach(prediction => {
     // this is how we get the prediction results
-    const [x, y, width, height] = predict['box']
-    const text = predict['class']
+    const [x, y, width, height] = prediction['bbox']
+    const text = prediction['class']
 
     // how to style the box
     // color of the box
@@ -16,7 +16,7 @@ export default function DrawBox(detections, ctx) {
     // figure out a way to draw the rectangle
     ctx.beginPath()
     ctx.fillText(text, x, y)
-    ctx.react(x, y, width, height)
-    ctx.stroke
+    ctx.rect(x, y, width, height)
+    ctx.stroke()
   })
 }
