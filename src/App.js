@@ -130,7 +130,7 @@ function App() {
           <img
             src="https://earthsky.org/upl/2019/06/b19e465cc4d37398ab2b72e9ba239e1a.jpg"
             alt="loadingscreen"
-            width="1000"
+            width="1400"
             height="1000"
           />
         </div>
@@ -140,14 +140,24 @@ function App() {
   }
 
   return (
-    <div>
-      <div className="flex justify-center items-center">
-        <h1 className="text-3xl">IDENTIFY ME!</h1>
+    <div className="bg-gray-400">
+      <input
+        className="invisible"
+        onChange={handleUpload}
+        type="file"
+        //  accept all image files
+        accept="image/*"
+        // if you're on your phone, it'll trigger the camera
+        capture="camera"
+        ref={picRef}
+      />
+      <div className="flex justify-center items-center ">
+        <h1 className="text-3xl font-sans-serif">IDENTIFY ME!</h1>
       </div>
 
       <div className="justify-between grids-cols-3 flex items-center p-20">
         <button
-          className="border bg-gray-300 btn-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center "
+          className="border  bg-gray-300 btn-gray-300 hover:bg-gray-400 hover:scale-105 text-gray-800 font-bold py-2 px-4 rounded-xl inline-flex items-center "
           type="submit"
           onClick={handleSubmit}
         >
@@ -163,7 +173,7 @@ function App() {
         <span className="font-bold text-xl">OR</span>
 
         <button
-          className="border bg-gray-300 btn-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+          className="border  bg-gray-300 btn-gray-300 hover:bg-gray-400 hover:scale-105 text-gray-800 font-bold py-2 px-4 rounded-xl inline-flex items-center"
           onClick={setPlaying}
         >
           Object Detection
@@ -171,7 +181,7 @@ function App() {
         <span className="font-bold text-xl">OR</span>
         {/* image url from website  */}
         <input
-          className="border border-xl bg-gray-200 text-center"
+          className="border border-xl bg-gray-200 text-center rounded-xl border-solid hover:scale-105"
           type="text"
           placeholder="Image address here"
           ref={imageUrl}
@@ -180,9 +190,10 @@ function App() {
       </div>
       {/* image url from website  */}
 
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center rounded-xl">
         {imgUrl ? (
           <img
+            className="rounded-xl shadow-xl"
             src={imgUrl}
             alt="picture"
             crossOrigin="anonymous"
@@ -192,10 +203,10 @@ function App() {
         {/* if the image exist, show the button, otherwise hide it */}
       </div>
 
-      <div className="flex justify-center items-center p-2">
+      <div className="flex justify-center items-center p-10">
         {imgUrl ? (
           <button
-            className="border bg-gray-300 btn-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center "
+            className="border bg-gray-300 btn-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-xl hover:scale-105 inline-flex items-center "
             onClick={handleIdentify}
             type="button"
           >
