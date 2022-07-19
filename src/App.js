@@ -7,6 +7,7 @@ import { ModelLoggingVerbosity } from '@tensorflow/tfjs-layers/dist/base_callbac
 // importing a second trained-model object detection
 import * as cocossd from '@tensorflow-models/coco-ssd'
 import Webcam from 'react-webcam';
+import DrawBox from './drawbox';
 
 function App() {
   // use the useState as a way to save the mobilenet model in the model state
