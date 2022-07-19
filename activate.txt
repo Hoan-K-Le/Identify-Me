@@ -1,1 +1,4 @@
 source venv/Scripts/activate
+
+https://stackoverflow.com/questions/38109270/cv2-import-error-on-jupyter-notebook
+^^ look at this regarding numpy install and stuff
