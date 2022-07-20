@@ -1,6 +1,6 @@
 ## IDENTIFY-ME
 
-- IDENTIFY-ME is a website where you can upload any image you want, and it is able to identify what the image is.
+- IDENTIFY-ME is a website where you can upload any image you want, and the ai will make a guess at what the image is.
 
 ## Wireframe
 
@@ -32,3 +32,9 @@
 - HTML
 - CSS
 - Tailwind
+
+## INSTALLATION
+
+- fork and clone
+- npm install
+- npm run start on client
