@@ -4,7 +4,7 @@
 
 ## Wireframe
 
-![](./wireframe.jpg)
+![](./wireframee.png)
 
 ## User Stories
 
