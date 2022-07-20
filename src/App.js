@@ -140,7 +140,7 @@ function App() {
   }
 
   return (
-    <div className="bg-gray-400">
+    <div className="bg-gray-400 h-screen">
       <input
         className="invisible"
         onChange={handleUpload}
